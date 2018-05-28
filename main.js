@@ -6,7 +6,7 @@ points = []
 for (i=0;i <= lines;i++){
   points[i] = [];
   for (j=0;j <= lines;j++){
-    points[i][j] = Math.floor((Math.random() * 100)+1);;
+    points[i][j] = Math.floor((Math.random() * 100)+1);
   }
 }
 points[0][lines] = 1;
@@ -40,6 +40,13 @@ function point(x,y){
   context.arc(x, y, 2, 0, 2 * Math.PI, false);
   context.stroke();
 }
+function round(number, precision) {
+  var shift = function (number, exponent) {
+    var numArray = ("" + number).split("e");
+    return +(numArray[0] + "e" + (numArray[1] ? (+numArray[1] + exponent) : exponent));
+  };
+  return shift(Math.round(shift(number, +precision)), -precision);
+}
 function path(){
   context.strokeStyle="black";
   last = [0,lines*sf];
@@ -51,20 +58,25 @@ function path(){
         corner = true
         y = lines - j
       }
+      context.fillStyle = "black";
+      context.font = "bold 16px Arial";
       if (!corner){
         if(points[i][lines - j] == 1 && last[0] < i*sf && last[1] >(lines - j)*sf && final[0] > i*sf && final[1] <(lines - j)*sf){
           line(last,[i*sf,(lines - j)*sf])
+          context.fillText(round(-1*((lines - j)*sf -last[1])/((i*sf)-last[0]),3), last[0] + ((i*sf) - last[0])/2, last[1] + ((lines - j)*sf -last[1])/2);
           last = [i*sf,(lines - j)*sf]
         }
       } else {
         if(points[j-i][y] == 1 && last[0] < (j-i)*sf && last[1] > y*sf && final[0] > (j-i)*sf && final[1] < y*sf){
           line(last,[(j-i)*sf, y*sf])
+          context.fillText(round(-1*((y*sf)-last[1])/(((j-i)*sf)-last[0]),3), last[0] + ((j-i)*sf - last[0])/2, last[1] + (y*sf -last[1])/2);
           last = [(j-i)*sf, y*sf]
         }
       }
     }
   }
   line(last,final)
+  context.fillText(-1*(final[1]-last[1])/(final[0]-last[0]), last[0] + (final[0] - last[0])/2, last[1] + (final[1] - last[1])/2);
 }
 function mainLoop() {
 draw()
