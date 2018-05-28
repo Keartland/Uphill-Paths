@@ -63,20 +63,20 @@ function path(){
       if (!corner){
         if(points[i][lines - j] == 1 && last[0] < i*sf && last[1] >(lines - j)*sf && final[0] > i*sf && final[1] <(lines - j)*sf){
           line(last,[i*sf,(lines - j)*sf])
-          context.fillText(round(-1*((lines - j)*sf -last[1])/((i*sf)-last[0]),3), last[0] + ((i*sf) - last[0])/2, last[1] + ((lines - j)*sf -last[1])/2);
+          context.fillText(round(-1*((lines - j)*sf -last[1])/((i*sf)-last[0]),3), ((i*sf) + last[0])/2, ((lines - j)*sf + last[1])/2);
           last = [i*sf,(lines - j)*sf]
         }
       } else {
         if(points[j-i][y] == 1 && last[0] < (j-i)*sf && last[1] > y*sf && final[0] > (j-i)*sf && final[1] < y*sf){
           line(last,[(j-i)*sf, y*sf])
-          context.fillText(round(-1*((y*sf)-last[1])/(((j-i)*sf)-last[0]),3), last[0] + ((j-i)*sf - last[0])/2, last[1] + (y*sf -last[1])/2);
+          context.fillText(round(-1*((y*sf)-last[1])/(((j-i)*sf)-last[0]),3), ((j-i)*sf + last[0])/2, (y*sf + last[1])/2);
           last = [(j-i)*sf, y*sf]
         }
       }
     }
   }
   line(last,final)
-  context.fillText(-1*(final[1]-last[1])/(final[0]-last[0]), last[0] + (final[0] - last[0])/2, last[1] + (final[1] - last[1])/2);
+  context.fillText(-1*(final[1]-last[1])/(final[0]-last[0]), (final[0] + last[0])/2, (final[1] + last[1])/2);
 }
 function mainLoop() {
 draw()
