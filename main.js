@@ -76,7 +76,7 @@ function path(){
     }
   }
   line(last,final)
-  context.fillText(-1*(final[1]-last[1])/(final[0]-last[0]), (final[0] + last[0])/2, (final[1] + last[1])/2);
+  context.fillText(round(-1*(final[1]-last[1])/(final[0]-last[0]),3), (final[0] + last[0])/2, (final[1] + last[1])/2);
 }
 function mainLoop() {
 draw()
