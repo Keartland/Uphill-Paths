@@ -95,4 +95,4 @@ if (lines != document.getElementById("lines").value){
 }
 requestAnimationFrame(mainLoop);
 }
-requestAnimationFrame(mainLoop);
+mainLoop();
